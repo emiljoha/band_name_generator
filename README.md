@@ -7,7 +7,7 @@ Draws a random wikipedia article and uses the title as the band name. The first 
 # Installation
 ```shell
 git clone https://github.com/emiljoha/band_name_generator.git
-virtualenv virtualenv --python=python3 band_name_generator
+virtualenv --python=python3 band_name_generator
 cd band_name_generator
 . bin/activate
 pip install -r requirements.py
