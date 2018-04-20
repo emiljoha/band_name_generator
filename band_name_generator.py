@@ -41,6 +41,6 @@ if get_album_art is True:
     # https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
     url = 'https://farm%s.staticflickr.com/%s/%s_%s.jpg' % (farm,
                                                             server,
-                                                            photo_secret,
-                                                            photo_id)
+                                                            photo_id,
+                                                            photo_secret)
     print(url)
