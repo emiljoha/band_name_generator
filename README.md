@@ -1,4 +1,5 @@
 # Wikipedia band name generator
+
 Use the only truly scientific way to generate bandnames and first album titles.
 
 Draws a random wikipedia article and uses the title as the band name. The first album name is choosen as the last 4 words of a random Aristotle quote.
