@@ -17,18 +17,23 @@ import flickrapi
 # You need personal api_key and secret from flickr to use api You need
 # to get your own and write a config.py file to get the flickr
 # image.
-try:
-    from config import api_key, secret
-    get_album_art = True
-except ImportError:
-    get_album_art = False
-    print('No album art will be downloaded as no api keys are found')
+from config import api_key, secret
 
 print('Band name: %s' % wiki.random(1).title())
 quote = wikiquotes.random_quote(author='Aristotle', raw_language="english")
 album_name = quote.split(' ')[-4:]
 album_name = ' '.join(album_name)
 print('First Album: %s' % album_name)
+
+# See if keys to get album art from flick is present
+if api_key == '<api key here>' or secret == '<secret here>':
+    print('No album art will be downloaded.')
+    print('No api keys found in config.py')
+    print('visit https://www.flickr.com/services/api/misc.api_keys.html')
+    print('To get keys to insert into config.py')
+    get_album_art = False
+else:
+    get_album_art = False
 
 if get_album_art is True:
     flickr = flickrapi.FlickrAPI(api_key, secret)
