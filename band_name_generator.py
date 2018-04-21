@@ -88,7 +88,18 @@ def create_album(cover_picture_url, band_name, album_name):
     return filename
 
 
-def main():
+def get_new_album():
+    band_name = get_band_name()
+    album_name = get_album_name()
+    cover_picture_url = get_album_art_url()
+    filename = create_album(cover_picture_url, band_name, album_name)
+    return {'band_name': band_name,
+            'album_name': album_name,
+            'cover_picture_url': cover_picture_url,
+            'filename': filename}
+
+
+def generate_album():
     band_name = get_band_name()
     album_name = get_album_name()
     print('Band name: %s' % band_name)
@@ -98,4 +109,5 @@ def main():
     os.system('xdg-open %s' % filename)
 
 
-main()
+if __name__ == '__main__':
+    generate_album()
