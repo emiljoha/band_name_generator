@@ -70,9 +70,19 @@ def create_album(cover_picture_url, band_name, album_name):
     img = Image.open(filename)
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype("fonts/NOVASOLID.ttf", 30)
-    draw.text((0*img.size[1]/4, img.size[1]/4), album_name, font=font,
+    band_name_text_size = draw.textsize('By %s' % band_name, font)
+    album_name_text_size = draw.textsize(album_name, font)
+    band_name_text_pos = (0*img.size[1]/4, 3*img.size[1]/4)
+    album_name_text_pos = (0*img.size[1]/4, img.size[1]/4)
+    band_name_rectangle = band_name_text_pos + (band_name_text_pos[0] + band_name_text_size[0],
+                                                band_name_text_pos[1] + band_name_text_size[1])
+    draw.rectangle(band_name_rectangle, fill=(0, 0, 0, 255), outline=None)
+    album_name_rectangle = album_name_text_pos + (album_name_text_pos[0] + album_name_text_size[0],
+                                                  album_name_text_pos[1] + album_name_text_size[1])
+    draw.rectangle(album_name_rectangle, fill=(0, 0, 0, 255), outline=None)
+    draw.text(album_name_text_pos, album_name, font=font,
               fill=(200, 0, 0, 255))
-    draw.text((0*img.size[1]/4, 3*img.size[1]/4), 'By: %s' % band_name,
+    draw.text(band_name_text_pos, 'By %s' % band_name,
               font=font, fill=(200, 0, 0, 255))
     img.save(filename, "JPEG", quality=300)
     return filename
@@ -86,5 +96,6 @@ def main():
     cover_picture_url = get_album_art_url()
     filename = create_album(cover_picture_url, band_name, album_name)
     os.system('xdg-open %s' % filename)
+
 
 main()
