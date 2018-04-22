@@ -20,7 +20,7 @@ import os
 # You need personal api_key and secret from flickr to use api You need
 # to get your own and write a config.py file to get the flickr
 # image.
-from config import api_key, secret
+from config import api_key, secret, domain
 
 
 def get_band_name():
@@ -59,13 +59,18 @@ def get_album_art_url():
         return url
 
 
-def create_album(cover_picture_url, band_name, album_name):
-    filename = '_'.join(band_name.split(' '))
-    if filename[-1] == '.':
-        filename = filename.split('')
-        del filename[-1]
-        filename = ''.join(filename)
+def format_file_name(band_name):
+    filename = []
+    for c in band_name:
+        if c not in {'.', ' ', '(', ')'}:
+            filename.append(c)
+    filename = ''.join(filename)
     filename = 'albums/%s.JPEG' % filename
+    return filename
+
+
+def create_album(cover_picture_url, band_name, album_name):
+    filename = format_file_name(band_name)
     download.urlretrieve(cover_picture_url, filename=filename)
     img = Image.open(filename)
     draw = ImageDraw.Draw(img)
@@ -93,10 +98,11 @@ def get_new_album():
     album_name = get_album_name()
     cover_picture_url = get_album_art_url()
     filename = create_album(cover_picture_url, band_name, album_name)
+    url = 'http://%s/%s' % (domain, filename)
     return {'band_name': band_name,
             'album_name': album_name,
             'cover_picture_url': cover_picture_url,
-            'filename': filename}
+            'url': url}
 
 
 def generate_album():
@@ -106,7 +112,8 @@ def generate_album():
     print('First Album: %s' % album_name)
     cover_picture_url = get_album_art_url()
     filename = create_album(cover_picture_url, band_name, album_name)
-    os.system('xdg-open %s' % filename)
+    # os.system('xdg-open %s' % filename)
+    print(filename)
 
 
 if __name__ == '__main__':

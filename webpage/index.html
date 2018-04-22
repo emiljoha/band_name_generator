@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script LANGUAGE="JavaScript">
+      function Get(yourUrl){
+	  var Httpreq = new XMLHttpRequest(); // a new request
+	  Httpreq.open("GET",yourUrl,false);
+	  Httpreq.send(null);
+	  return Httpreq.responseText;    
+      }
+      function newAlbum() {
+	  var api_url = "http://localhost:5000/get_album_info"
+	  var json_obj = JSON.parse(Get(api_url));
+	  document.getElementById("album_image").src=json_obj.url
+      }
+    </script>
+  </head>
+  <body>
+    <img id="album_image" src="http://localhost:5000/albums/Huz.JPEG" alt="Click button to generate album">
+    <button onclick="newAlbum()">New album</button>
+  </body>
+</html>
