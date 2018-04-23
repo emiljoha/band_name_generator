@@ -83,14 +83,14 @@ def create_album(cover_picture_url, band_name, album_name):
     album_name_text_pos = (0*img.size[1]/4, img.size[1]/4)
     band_name_rectangle = band_name_text_pos + (band_name_text_pos[0] + band_name_text_size[0],
                                                 band_name_text_pos[1] + band_name_text_size[1])
-    draw.rectangle(band_name_rectangle, fill=(0, 0, 0, 255), outline=None)
+    draw.rectangle(list(band_name_rectangle), fill='white', outline=None)
     album_name_rectangle = album_name_text_pos + (album_name_text_pos[0] + album_name_text_size[0],
                                                   album_name_text_pos[1] + album_name_text_size[1])
-    draw.rectangle(album_name_rectangle, fill=(0, 0, 0, 255), outline=None)
+    draw.rectangle(album_name_rectangle, fill='white', outline=None)
     draw.text(album_name_text_pos, album_name, font=font,
-              fill=(200, 0, 0, 255))
+              fill='red')
     draw.text(band_name_text_pos, 'By %s' % band_name,
-              font=font, fill=(200, 0, 0, 255))
+              font=font, fill='red')
     img.save(filename, "JPEG", quality=300)
     return filename
 
