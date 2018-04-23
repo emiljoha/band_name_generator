@@ -71,6 +71,8 @@ def format_file_name(band_name):
 
 def create_album(cover_picture_url, band_name, album_name):
     filename = format_file_name(band_name)
+    if not os.path.isdir('albums'):
+        os.makedirs('albums')
     download.urlretrieve(cover_picture_url, filename=filename)
     img = Image.open(filename)
     draw = ImageDraw.Draw(img)
