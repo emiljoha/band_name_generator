@@ -62,7 +62,7 @@ def get_album_art_url():
 def format_file_name(band_name):
     filename = []
     for c in band_name:
-        if c not in {'.', ' ', '(', ')'}:
+        if c not in {'.', ' ', '(', ')', '\'', '\"', '\`'}:
             filename.append(c)
     filename = ''.join(filename)
     filename = 'albums/%s.JPEG' % filename
