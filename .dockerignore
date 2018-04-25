@@ -1,2 +1,10 @@
+webpage
+LICENSE
 bin
+.git
+include
 lib*
+Makefile
+.*
+pip*
+__*

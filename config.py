@@ -1,3 +1,4 @@
 api_key = '<api key here>'
 secret = '<secret here>'
-domain = 'localhost:5000'
+port = 5000
+domain = 'localhost'
