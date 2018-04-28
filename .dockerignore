@@ -7,4 +7,4 @@ lib*
 Makefile
 .*
 pip*
-__*
+__pycache__

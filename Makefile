@@ -12,3 +12,7 @@ run_app:
 run_web:
 	docker run -p 80:80 wbg-web &
 
+clean:
+	rm *~
+	cd config
+	rm *~

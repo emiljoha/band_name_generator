@@ -20,7 +20,7 @@ import os
 # You need personal api_key and secret from flickr to use api You need
 # to get your own and write a config.py file to get the flickr
 # image.
-from config import api_key, secret, domain, port
+from config.secret_config import api_key, secret, domain, port
 
 
 def get_band_name():

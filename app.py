@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 from band_name_generator import get_new_album
-from config import port
+from config.secret_config import port
 
 app = Flask(__name__)
 CORS(app)
