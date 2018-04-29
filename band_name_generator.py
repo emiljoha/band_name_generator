@@ -18,6 +18,7 @@ import flickrapi
 import urllib.request as download
 from PIL import Image, ImageDraw, ImageFont
 import os
+import random
 # You need personal api_key and secret from flickr to use api You need
 # to get your own and write a config.py file to get the flickr
 # image.
@@ -67,7 +68,14 @@ def get_album_art_url():
 def format_file_name(band_name):
     """Get file name from band name"""
     # Who cares if it is readable, should never bee seen by anyone
-    return abs(hash(band_name))
+    filename = str(abs(hash(band_name)))
+    return 'albums/%s.JPEG' % filename
+
+
+def get_font():
+    font_list = os.listdir('fonts')
+    font_name = random.choice(font_list)
+    return ImageFont.truetype("fonts/%s" % font_name, 30)
 
 
 def create_album(cover_picture_url, band_name, album_name):
@@ -77,7 +85,7 @@ def create_album(cover_picture_url, band_name, album_name):
     download.urlretrieve(cover_picture_url, filename=filename)
     img = Image.open(filename)
     draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype("fonts/NOVASOLID.ttf", 30)
+    font = get_font()
     band_name_text_size = draw.textsize('By %s' % band_name, font)
     album_name_text_size = draw.textsize(album_name, font)
     band_name_text_pos = (0*img.size[1]/4, 3*img.size[1]/4)
