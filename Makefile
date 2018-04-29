@@ -1,16 +1,14 @@
 app: 
-	docker build -t wbg .
+	docker build -t emijoh/wikibandgen .
 
 web:
-	. bin/activate
-	python config.py
-	docker build -t wbg-web webpage/
+	docker build -t emijoh/wikibandgen-web webpage/
 
 run_app:
-	docker run -p 5000:5000 wbg &
+	docker run -p 5000:5000 -v config:/app/config emijoh/wikibandgen:latest &
 
 run_web:
-	docker run -p 80:80 wbg-web &
+	docker run -p 80:80 emijoh/wikibandgen-web:latest &
 
 clean:
 	rm *~
