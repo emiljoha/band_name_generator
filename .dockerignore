@@ -1,10 +1,4 @@
 webpage
 LICENSE
-bin
 .git
-include
-lib*
-Makefile
-.*
-pip*
-__pycache__
+config
