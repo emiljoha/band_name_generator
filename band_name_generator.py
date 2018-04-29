@@ -65,13 +65,9 @@ def get_album_art_url():
 
 
 def format_file_name(band_name):
-    filename = []
-    for c in band_name:
-        if c not in {'.', ' ', '(', ')', '\'', '\"', '\`'}:
-            filename.append(c)
-    filename = ''.join(filename)
-    filename = 'albums/%s.JPEG' % filename
-    return filename
+    """Get file name from band name"""
+    # Who cares if it is readable, should never bee seen by anyone
+    return abs(hash(band_name))
 
 
 def create_album(cover_picture_url, band_name, album_name):
