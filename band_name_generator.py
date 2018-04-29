@@ -12,7 +12,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import wikipedia as wiki
-import wikiquotes
+import requests
+import bs4 as BeautifulSoup
 import flickrapi
 import urllib.request as download
 from PIL import Image, ImageDraw, ImageFont
@@ -29,7 +30,11 @@ def get_band_name():
 
 
 def get_album_name():
-    quote = wikiquotes.random_quote(author='Aristotle', raw_language="english")
+    """Extract last four words of the last quote"""
+    sess = requests.session()
+    webpage = sess.get('http://www.quotationspage.com/random.php3')
+    soup = BeautifulSoup.BeautifulSoup(webpage.content, 'html.parser')
+    quote = soup.findAll('dt', {'class': 'quote'})[-1].a.string
     album_name = quote.split(' ')[-4:]
     album_name = ' '.join(album_name)
     return album_name
