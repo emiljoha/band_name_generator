@@ -5,3 +5,4 @@ pillow
 flask
 flask-cors
 flickrapi
+gunicorn
