@@ -22,7 +22,6 @@ import random
 # You need personal api_key and secret from flickr to use api You need
 # to get your own and write a config.py file to get the flickr
 # image.
-from config.secret_config import api_key, secret, domain, port
 
 
 def get_band_name():
@@ -43,14 +42,15 @@ def get_album_name():
 
 def get_album_art_url():
     # See if keys to get album art from flick is present
-    if api_key == '<api key here>' or secret == '<secret here>':
+    if ('FLICKR_API_KEY' not in os.environ or 'FLICKR_API_SECRET' not in os.environ):
         print('No album art will be downloaded.')
         print('No api keys found in config.py')
         print('visit https://www.flickr.com/services/api/misc.api_keys.html')
         print('To get keys to insert into config.py')
         return None
     else:
-        flickr = flickrapi.FlickrAPI(api_key, secret)
+        flickr = flickrapi.FlickrAPI(os.environ['FLICKR_API_KEY'],
+                                     os.environ['FLICKR_API_SECRET'])
         recent_photos_lxml = flickr.photos.getRecent(per_page=3)
         third_photo_info = recent_photos_lxml[0][2]
         farm = third_photo_info.get('farm')
@@ -109,7 +109,10 @@ def get_new_album():
     album_name = get_album_name()
     cover_picture_url = get_album_art_url()
     filename = create_album(cover_picture_url, band_name, album_name)
-    url = 'http://%s:%s/%s' % (domain, port, filename)
+    # TODO: This URl building thing is horredous.
+    url = 'http://%s:%s/%s' % (os.environ['DOMAIN'],
+                               os.environ['PORT'],
+                               filename)
     return {'band_name': band_name,
             'album_name': album_name,
             'cover_picture_url': cover_picture_url,
