@@ -33,7 +33,7 @@ def get_band_name():
 def get_album_name():
     """Extract last four words of the last quote"""
     sess = requests.session()
-    webpage = sess.get('http://www.quotationspage.com/random.php3')
+    webpage = sess.get('http://www.quotationspage.com/random.php')
     soup = BeautifulSoup.BeautifulSoup(webpage.content, 'html.parser')
     quote = soup.findAll('dt', {'class': 'quote'})[-1].a.string
     album_name = quote.split(' ')[-4:]
