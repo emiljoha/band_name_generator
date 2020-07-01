@@ -9,7 +9,7 @@
 	  return Httpreq.responseText;
       }
       function newAlbum() {
-	  var api_url = "http://localhost:5000/get_album_info"
+	  var api_url = "{{ base_url }}/get_album_info"
 	  var json_obj = JSON.parse(Get(api_url));
 	  document.getElementById("album_image").src=json_obj.url
       }

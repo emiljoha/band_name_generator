@@ -6,6 +6,16 @@ from band_name_generator import get_new_album
 app = Flask(__name__)
 CORS(app)
 
+
+@app.route('/')
+def root():
+    return render_template("index.html",
+                           base_url=("http://" +
+                                     os.environ['DOMAIN'] +
+                                     ":" +
+                                     os.environ['PORT']))
+
+
 @app.route('/get_album_info', methods=['GET'])
 def get_album_info():
     return jsonify(get_new_album())
