@@ -8,8 +8,8 @@ Draws a random wikipedia article and uses the title as the band name. The first 
 
 The easiest way to get the web server up and running is with docker. 
 
-If you have not already make sure you have [installed
-docker](https://docs.docker.com/get-docker/) and
+If you have not already make sure you have installed
+[docker](https://docs.docker.com/get-docker/) and
 [docker-compose](https://docs.docker.com/compose/install/)
 
 Create a file `.env` containing the enviroment variables needed to configure
