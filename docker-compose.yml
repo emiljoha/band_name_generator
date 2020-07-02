@@ -1,0 +1,11 @@
+version: "3"
+services:
+  app:
+    build: .
+    ports:
+      - $PORT:$PORT
+    environment:
+      - DOMAIN=$DOMAIN
+      - PORT=$PORT
+      - FLICKR_API_KEY=$FLICKR_API_KEY
+      - FLICKR_API_SECRET=$FLICKR_API_SECRET
